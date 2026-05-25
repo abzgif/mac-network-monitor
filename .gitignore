@@ -1,0 +1,14 @@
+# macOS system files
+.DS_Store
+
+# Swift Package Manager build artifacts
+.build/
+.swiftpm/
+
+# Our custom build output directory
+build/
+
+# Xcode user state
+xcuserdata/
+*.xcworkspace/
+*.xcodeproj/
