@@ -99,7 +99,7 @@ To open the app safely:
 2. Open **System Settings** on your Mac.
 3. Go to **Privacy & Security** in the sidebar.
 4. Scroll down to the **Security** section and look for the message: *"NetworkMonitor was blocked..."*
-5. Click **Open Anyway**, enter your Mac password, and click **Open**.
+5. Click **Open Anyway**, enter your Touch ID or Mac password, and click **Open**.
 6. This only needs to be done once! Subsequent launches will open instantly without warnings.
 
 ---
