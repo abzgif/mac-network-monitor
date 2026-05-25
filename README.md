@@ -91,6 +91,17 @@ You can launch the built application directly from Finder or using:
 open build/NetworkMonitor.app
 ```
 
+#### Note on First-Time Launch (Gatekeeper Warning)
+Because this is an open-source project and not signed with a paid Apple Developer Account, macOS will block it on the first launch with a security warning stating that *"Apple could not verify the developer"*.
+
+To open the app safely:
+1. Double-click the app. When the warning appears, click **Done**.
+2. Open **System Settings** on your Mac.
+3. Go to **Privacy & Security** in the sidebar.
+4. Scroll down to the **Security** section and look for the message: *"NetworkMonitor was blocked..."*
+5. Click **Open Anyway**, enter your Mac password, and click **Open**.
+6. This only needs to be done once! Subsequent launches will open instantly without warnings.
+
 ---
 
 ## License
