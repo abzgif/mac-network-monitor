@@ -2,7 +2,8 @@
 
 A lightweight, native macOS menu bar utility built with **SwiftUI** and Swift Package Manager. It displays real-time upload and download speeds directly in the system status bar, refreshing every second. Clicking the menu bar item expands a premium glassmorphic dashboard showcasing detailed transfer metrics, session uptime, and active network interfaces.
 
-![App Icon](app_icon.png)
+![Dashboard Screenshot](Screenshot.png)
+
 
 ## Key Features
 
@@ -32,7 +33,7 @@ A lightweight, native macOS menu bar utility built with **SwiftUI** and Swift Pa
 ```text
 mac-network-monitor/
 ├── Package.swift               # Swift Package Manager configuration
-├── app_icon.png                # High-res App icon source image
+├── Screenshot.png              # App screenshot for documentation
 ├── build.sh                    # Build and packaging script (.app bundle generator)
 ├── Sources/
 │   └── NetworkMonitor/
@@ -81,7 +82,7 @@ chmod +x build.sh
 The script will:
 1. Compile the Swift executable in `release` mode.
 2. Build the `NetworkMonitor.app` bundle directory.
-3. Automatically generate the multi-resolution `.icns` file from `app_icon.png` using Apple's `sips` and `iconutil` utilities.
+3. Automatically generate the multi-resolution `.icns` file if `app_icon.png` is present in the root folder.
 4. Insert the appropriate `Info.plist` keys (e.g., `LSUIElement = true` so the application runs as a background accessory with no Dock icon).
 5. Apply an ad-hoc code signature.
 
