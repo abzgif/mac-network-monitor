@@ -34,6 +34,7 @@ A lightweight, native macOS menu bar utility built with **SwiftUI** and Swift Pa
 mac-network-monitor/
 ├── Package.swift               # Swift Package Manager configuration
 ├── Screenshot.png              # App screenshot for documentation
+├── app_icon.png                # High-res App icon source image
 ├── build.sh                    # Build and packaging script (.app bundle generator)
 ├── Sources/
 │   └── NetworkMonitor/
@@ -82,7 +83,7 @@ chmod +x build.sh
 The script will:
 1. Compile the Swift executable in `release` mode.
 2. Build the `NetworkMonitor.app` bundle directory.
-3. Automatically generate the multi-resolution `.icns` file if `app_icon.png` is present in the root folder.
+3. Automatically generate the multi-resolution `.icns` file from `app_icon.png` using Apple's `sips` and `iconutil` utilities.
 4. Insert the appropriate `Info.plist` keys (e.g., `LSUIElement = true` so the application runs as a background accessory with no Dock icon).
 5. Apply an ad-hoc code signature.
 

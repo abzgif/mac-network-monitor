@@ -143,6 +143,16 @@ public struct DashboardView: View {
                 .toggleStyle(.checkbox)
                 
                 Spacer()
+                
+                Button(action: {
+                    AboutWindowController.shared.show()
+                }) {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 13))
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(.plain)
+                .help("About Network Monitor")
             }
         }
         .padding(14)
