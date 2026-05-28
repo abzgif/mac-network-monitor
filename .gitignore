@@ -7,6 +7,7 @@
 
 # Our custom build output directory
 build/
+*.zip
 
 # Xcode user state
 xcuserdata/
