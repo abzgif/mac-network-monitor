@@ -1,3 +1,5 @@
+### **Browse more useful projects at:** [bytegif.com](https://bytegif.com)
+
 # macOS Menu Bar Network Monitor
 
 A lightweight, native macOS menu bar utility built with **SwiftUI** and Swift Package Manager. It displays real-time upload and download speeds directly in the system status bar, refreshing every second. Clicking the menu bar item expands a premium glassmorphic dashboard showcasing detailed transfer metrics, session uptime, and active network interfaces.
