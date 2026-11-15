@@ -1,14 +1,17 @@
 import SwiftUI
+import Combine
 
 /// The main dashboard view displayed when the user clicks the menu bar item.
 public struct DashboardView: View {
     @ObservedObject var monitor: NetworkStatsManager
     @ObservedObject var launchManager: LaunchAtLoginManager
     
-    @State private var startTime = Date()
-    @State private var timeElapsed: TimeInterval = 0
-    @State private var isHoveringQuit = false
-    @State private var isInterfacesExpanded = false
+    private typealias ViewState<Value> = SwiftUI.State<Value>
+    
+    @ViewState private var startTime = Date()
+    @ViewState private var timeElapsed: TimeInterval = 0
+    @ViewState private var isHoveringQuit = false
+    @ViewState private var isInterfacesExpanded = false
     
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -187,7 +190,8 @@ struct SpeedCard: View {
     let icon: String
     let color: Color
     
-    @State private var isHovered = false
+    private typealias ViewState<Value> = SwiftUI.State<Value>
+    @ViewState private var isHovered = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {

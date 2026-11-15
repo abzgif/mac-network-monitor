@@ -3,9 +3,11 @@ import AppKit
 
 /// The About View displaying app info, GitHub link, and check for updates.
 struct AboutView: View {
-    @State private var checkStatus: UpdateCheckStatus = .idle
-    @State private var latestVersion: String? = nil
-    @State private var latestUrl: String? = nil
+    private typealias ViewState<Value> = SwiftUI.State<Value>
+    
+    @ViewState private var checkStatus: UpdateCheckStatus = .idle
+    @ViewState private var latestVersion: String? = nil
+    @ViewState private var latestUrl: String? = nil
     
     enum UpdateCheckStatus {
         case idle

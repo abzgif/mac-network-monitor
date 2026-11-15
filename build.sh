@@ -7,13 +7,20 @@ echo "🚀 Starting build process for NetworkMonitor..."
 
 # 1. Build the executable using Swift Package Manager
 echo "📦 Compiling Swift Package (Release mode)..."
-swift build -c release
+swift build --disable-sandbox -c release -Xswiftc -module-cache-path -Xswiftc /tmp/swift-module-cache
 
 # 2. Create the .app bundle directory structure
 echo "📂 Creating App Bundle structure..."
 APP_DIR="build/NetworkMonitor.app"
 MACOS_DIR="$APP_DIR/Contents/MacOS"
 RESOURCES_DIR="$APP_DIR/Contents/Resources"
+
+# Preserve existing AppIcon.icns if present before cleaning build/
+if [ -f "$RESOURCES_DIR/AppIcon.icns" ]; then
+    cp "$RESOURCES_DIR/AppIcon.icns" /tmp/NetworkMonitor_AppIcon.icns
+elif [ -f "NetworkMonitor.zip" ]; then
+    unzip -p NetworkMonitor.zip "NetworkMonitor.app/Contents/Resources/AppIcon.icns" > /tmp/NetworkMonitor_AppIcon.icns 2>/dev/null || true
+fi
 
 # Clean up previous builds
 rm -rf build/
@@ -46,11 +53,11 @@ cat <<EOF > "$APP_DIR/Contents/Info.plist"
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.1.0</string>
+    <string>1.2.0</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>2</string>
     <key>LSMinimumSystemVersion</key>
     <string>13.0</string>
     <key>LSUIElement</key>
@@ -81,15 +88,18 @@ if [ -f "app_icon.png" ]; then
     sips -s format png -z 512 512   app_icon.png --out "$ICONSET_DIR/icon_512x512.png" > /dev/null 2>&1
     sips -s format png -z 1024 1024 app_icon.png --out "$ICONSET_DIR/icon_512x512@2x.png" > /dev/null 2>&1
     
-    # Convert iconset directory to a single .icns file
-    iconutil -c icns "$ICONSET_DIR"
-    
-    # Move to Resources folder
-    mv NetworkMonitor.icns "$RESOURCES_DIR/AppIcon.icns"
+    # Convert iconset directory to a single .icns file (with fallback to cached AppIcon.icns)
+    if iconutil -c icns "$ICONSET_DIR" > /dev/null 2>&1; then
+        mv NetworkMonitor.icns "$RESOURCES_DIR/AppIcon.icns"
+        echo "✅ AppIcon.icns generated successfully."
+    elif [ -f /tmp/NetworkMonitor_AppIcon.icns ]; then
+        cp /tmp/NetworkMonitor_AppIcon.icns "$RESOURCES_DIR/AppIcon.icns"
+        echo "✅ Restored AppIcon.icns."
+    fi
+    rm -f /tmp/NetworkMonitor_AppIcon.icns
     
     # Clean up temporary iconset directory
     rm -rf "$ICONSET_DIR"
-    echo "✅ AppIcon.icns generated successfully."
 else
     echo "⚠️ app_icon.png not found. Skipping AppIcon.icns generation."
 fi
